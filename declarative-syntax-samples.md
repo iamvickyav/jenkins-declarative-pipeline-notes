@@ -294,6 +294,37 @@ pipeline {
 }
 ```
 
+## parallel
+
+```groovy
+pipeline {
+    agent any
+    stages {
+        stage('Parallel Stage') {
+            parallel {
+                stage('windows script') {
+                    agent {
+                        label "windows"
+                    }
+                    steps {
+                        	echo "Running in windows agent"
+		                    bat 'echo %PATH%'
+                    }
+                }
+                stage('linux script') {
+                    agent {
+                        label "linux"
+                    }
+                    steps {
+                       sh "Running in Linux agent"
+                    }
+                }
+             }
+        }
+    }
+}
+```
+
 ## post
 
 ### post with multiple conditional blocks
